@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&display=swap" rel="stylesheet">
+
     <title>Panchal Rolling Shutter</title>
     <style>
         /* Body styling */
         body {
             margin: 0;
             padding: 0;
-            background-color: rgb(212, 212, 212); 
+            background-image:linear-gradient(rgba(68, 68, 170, 0.336),rgba(255, 192, 203, 0.199),rgba(0, 0, 255, 0.319)); 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,7 +23,7 @@
         .dukaan {
             width: 300px;
             height: 400px;
-            background-color: rgb(212, 212, 212); 
+            background-image:linear-gradient(rgba(255, 255, 255, 0.633),rgba(128, 128, 128, 0.178),rgba(255, 255, 255, 0.425)); 
             position: absolute;
             border-left: 20px solid grey;  
             border-right: 20px solid grey; 
@@ -36,7 +38,7 @@
             height: 70px; 
             background-color: grey;
             position: relative;
-            top: -180px; 
+            top: -235px; 
             z-index: 10;
             border: 1px solid black; 
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.8); 
@@ -47,20 +49,33 @@
                  flex-direction: row;
                  justify-content:left;
                  align-items:center;
-                 margin-top: -30px;
+                 margin-top: -35px;
                  margin-left: 20px;
                  color: rgb(255, 255, 255);
+                 font-family: 'Noto Sans Devanagari', sans-serif;
                }
+               @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap');
 
-               .p{
+               /* .p{
                 font-size: 40px;
                 font-weight: 800;
-               }
+               } */
+               .p {
+                font-family: 'Mukta', sans-serif;
+                font-size: 40px;
+                font-weight: 800;
+                  }
 
                .rs{
-                margin-top: 32px;
-                font-size: 20px;
+                margin-top: 25px;
+                font-size: 22px;
                 font-weight: 600;
+                margin-left: 8px;
+               }
+               .s{
+                margin-top: 25px;
+                font-size: 14px;
+                font-weight: 550;
                 margin-left: 8px;
                }
                .mo{
@@ -111,7 +126,11 @@
 </head>
 <body>
     <div class="dhakkan">
-        <div class="name"><p class="p">Panchal</p><p class="rs">Rolling Shutter</p>
+        <!-- <div class="name"><p class="p">Panchal</p><p class="rs">Rolling Shutter</p></div> -->
+        <div class="name">
+            <p class="p">पाँचाल</p>
+            <p class="rs">रोलिंग शटर </p>
+            <p class="s">संवरसी</p>
         </div>
         
     </div>
