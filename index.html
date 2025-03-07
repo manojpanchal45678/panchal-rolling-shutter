@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panchal Rolling Shutter</title>
+    <style>
+        /* Body styling */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(212, 212, 212); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Dukaan styling */
+        .dukaan {
+            width: 300px;
+            height: 400px;
+            background-color: rgb(212, 212, 212); 
+            position: absolute;
+            border-left: 20px solid grey;  
+            border-right: 20px solid grey; 
+            border-top: 2px solid black; 
+            border-bottom: 2px solid black; 
+            overflow: hidden;
+        }
+
+        /* Dhakkan styling */
+        .dhakkan {
+            width: 380px; 
+            height: 70px; 
+            background-color: grey;
+            position: relative;
+            top: -180px; 
+            z-index: 10;
+            border: 1px solid black; 
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.8); 
+               }
+    
+               .name{
+                 display: flex;
+                 flex-direction: row;
+                 justify-content:left;
+                 align-items:center;
+                 margin-top: -30px;
+                 margin-left: 20px;
+                 color: rgb(255, 255, 255);
+               }
+
+               .p{
+                font-size: 40px;
+                font-weight: 800;
+               }
+
+               .rs{
+                margin-top: 32px;
+                font-size: 20px;
+                font-weight: 600;
+                margin-left: 8px;
+               }
+               .mo{
+                font-size: 10px;
+               }
+
+        /* Rolling shutter styling */
+        .shutter {
+            width: 100%;
+            height: 100%;
+            background-color: transparent; 
+            position: absolute;
+            top: -100%; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: top 4s linear; 
+        }
+
+        /* Shutter rips */
+        .shutter-rip {
+            width: 100%;
+            height: 20px; 
+            background-color: white; 
+            border-bottom: 2px solid black; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        }
+
+        /* Extra wide rip at the end */
+        .shutter-rip.extra {
+            width: 150%; 
+            height: 37px;
+            background-color: grey; 
+            margin-left: -25%; 
+        }
+
+        /* Color classes for rips */
+        .shutter-rip.orange {
+            background-color: orange;
+        }
+        .shutter-rip.blue {
+            background-color: blue;
+        }
+        .shutter-rip.grey {
+            background-color: grey;
+        }
+    </style>
+</head>
+<body>
+    <div class="dhakkan">
+        <div class="name"><p class="p">Panchal</p><p class="rs">Rolling Shutter</p>
+        </div>
+        
+    </div>
+
+    <div class="dukaan">
+       
+        <div class="shutter" id="shutter">
+            
+        </div>
+    </div>
+    
+
+    <script>
+       
+        function createRips(pattern) {
+            const shutter = document.getElementById('shutter');
+            shutter.innerHTML = ''; // Clear existing rips
+
+            for (let i = 0; i < 24; i++) { 
+                const rip = document.createElement('div');
+                rip.className = 'shutter-rip';
+
+                // Apply color based on the pattern
+                if (pattern === 'orange' && (i % 6 === 4 || i % 6 === 5)) {
+                    rip.classList.add('orange');
+                } else if (pattern === 'blue' && (i % 6 === 4 || i % 6 === 5)) {
+                    rip.classList.add('blue');
+                } else if (pattern === 'grey' && (i % 6 === 4 || i % 6 === 5)) {
+                    rip.classList.add('grey');
+                }
+
+                shutter.appendChild(rip);
+            }
+
+            // Add 4 extra white rips at the end
+            for (let i = 0; i < 4; i++) {
+                const rip = document.createElement('div');
+                rip.className = 'shutter-rip';
+                shutter.appendChild(rip);
+            }
+
+            // Add extra wide grey rip at the end
+            const extraRip = document.createElement('div');
+            extraRip.className = 'shutter-rip extra';
+            shutter.appendChild(extraRip);
+        }
+
+        // Function to change the color pattern in cycles
+        let currentPattern = 'orange'; 
+        function changePattern() {
+            if (currentPattern === 'orange') {
+                currentPattern = 'blue'; 
+            } else if (currentPattern === 'blue') {
+                currentPattern = 'grey'; 
+            } else if (currentPattern === 'grey') {
+                currentPattern = 'orange'; 
+            }
+            createRips(currentPattern); 
+        }
+
+        // JavaScript to control shutter movement
+        const shutter = document.getElementById('shutter');
+
+        function openShutter() {
+            shutter.style.top = '-100%'; /* Shutter opens (moves up) */
+        }
+
+        function closeShutter() {
+            shutter.style.top = '0%'; /* Shutter closes (moves down) */
+        }
+
+        // Automate shutter movement and pattern change
+        function startShutter() {
+            setTimeout(() => {
+                closeShutter(); /* Shutter closes (moves down) after 4 seconds */
+                setTimeout(() => {
+                    openShutter(); /* Shutter opens (moves up) after 4 seconds */
+                    setTimeout(() => {
+                        changePattern(); /* Change color pattern after the round completes */
+                    }, 4000); /* Wait for shutter to fully open */
+                }, 8000); /* 4 seconds to close + 4 seconds delay */
+            }, 2000); /* Start after 4 seconds */
+        }
+
+        // Initialize the first set of rips
+        createRips(currentPattern);
+
+        // Start the shutter movement
+        startShutter();
+        setInterval(startShutter, 16000); 
+    </script>
+</body>
+</html>
